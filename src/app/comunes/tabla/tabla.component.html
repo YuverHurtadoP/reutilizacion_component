@@ -1,0 +1,17 @@
+<table>
+  <thead>
+    <tr>
+      <th *ngFor="let column of columns">{{ column }}</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of data">
+      <td *ngFor="let column of columns">{{ row[column] }}</td>
+      <td>
+        <button (click)="onUpdate(row)">Update</button>
+        <button (click)="onDelete(row)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div *ngFor="let control of formConfig">
+    <label [for]="control.name">{{ control.label }}</label>
+    <input
+      [id]="control.name"
+      [type]="control.type"
+      [formControlName]="control.name"
+      [placeholder]="control.placeholder">
+    <div *ngIf="form.get(control.name)?.invalid && (form.get(control.name)?.dirty || form.get(control.name)?.touched)">
+      <small *ngIf="form.get(control.name)?.errors?.['required']">This field is required.</small>
+      <small *ngIf="form.get(control.name)?.errors?.['minlength']">Minimum length is {{ control.validators?.['minLength'] }}.</small>
+      <small *ngIf="form.get(control.name)?.errors?.['maxlength']">Maximum length is {{ control.validators?.['maxLength'] }}.</small>
+      <small *ngIf="form.get(control.name)?.errors?.['pattern']">Invalid format.</small>
+    </div>
+  </div>
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>
